@@ -41,7 +41,7 @@
 ```
 
 ## Requirements
-- python 3.8.5
+- python 3.9.6
 
 ## Installation
 ```sh
