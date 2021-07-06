@@ -21,3 +21,14 @@ app = FastAPI()
 @app.get('/')
 def read_root():
     return {'Hello': 'World'}
+
+@app.post('/mock')
+def get_mock_data (request: RequestType) -> ResponseType:
+    response: ResponseType = {
+        'time_table': [
+            { 'time': ('07:18', '08:24'), 'type': 'local' },
+            { 'time': ('07:35', '08:33'), 'type': 'rapid' },
+            { 'time': ('08:06', '09:02'), 'type': 'local' }
+        ]
+    }
+    return response
