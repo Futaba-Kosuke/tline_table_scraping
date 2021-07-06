@@ -1,13 +1,23 @@
+from typing import List, Tuple, TypedDict
+from pydantic import BaseModel
+
 from fastapi import FastAPI
+
+
+TrainType = TypedDict('TrainType', {
+            'time': Tuple[str, str],
+            'type': str 
+        })
+
+class RequestType (BaseModel):
+    starting_point: str
+    end_point: str
+
+class ResponseType (TypedDict):
+    time_table: List[TrainType]
 
 app = FastAPI()
 
-
-@app.get("/")
+@app.get('/')
 def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+    return {'Hello': 'World'}
