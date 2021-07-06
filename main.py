@@ -9,10 +9,6 @@ TrainType = TypedDict('TrainType', {
             'type': str 
         })
 
-class RequestType (BaseModel):
-    starting_point: str
-    end_point: str
-
 class ResponseType (TypedDict):
     time_table: List[TrainType]
 
@@ -22,8 +18,8 @@ app = FastAPI()
 def read_root():
     return {'Hello': 'World'}
 
-@app.post('/mock')
-def get_mock_data (request: RequestType) -> ResponseType:
+@app.get('/mock')
+def get_mock_data (starting_point: str, end_point: str) -> ResponseType:
     response: ResponseType = {
         'time_table': [
             { 'time': ('07:18', '08:24'), 'type': 'local' },
