@@ -6,13 +6,13 @@
 
 ### inputs
 ```sh
-'inputs': {
+{
     'starting_point': '{$現在駅}'
     'end_point': '{$目的駅}'
 }
 
 # example
-'inputs': {
+{
     'starting_point': '田川後藤寺'
     'end_point': '小倉'
 }
@@ -20,7 +20,7 @@
 
 ### outputs
 ```sh
-'outputs': {
+{
     'time_table': [
         { 'time': ['HH:MM', 'HH:MM'], 'type': 'local' },
         { 'time': ['HH:MM', 'HH:MM'], 'type': 'rapid' },
@@ -30,7 +30,7 @@
 }
 
 # example
-'outputs': {
+{
     'time_table': [
         { 'time': ['07:18', '08:24'], 'type': 'local' },
         { 'time': ['07:35', '08:33'], 'type': 'rapid' },
