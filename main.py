@@ -1,5 +1,4 @@
 from typing import List, Tuple, TypedDict
-from pydantic import BaseModel
 
 from fastapi import FastAPI
 
