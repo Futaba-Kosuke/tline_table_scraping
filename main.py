@@ -1,16 +1,6 @@
-from typing import List, Tuple, TypedDict
-
 from fastapi import FastAPI
 
-TrainType = TypedDict('TrainType', {
-    'time': Tuple[str, str],
-    'type': str
-})
-
-
-class ResponseType(TypedDict):
-    time_table: List[TrainType]
-
+from my_types import ResponseType
 
 app = FastAPI()
 
