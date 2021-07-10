@@ -11,7 +11,6 @@ TRANSFER_URL: Final[str] = 'https://www.navitime.co.jp/transfer/'
 
 
 def access_page(starting_point: str, end_point: str) -> str:
-    driver = webdriver.Chrome()
     driver.get(TRANSFER_URL)
 
     driver.find_element_by_id('orv-station-name').send_keys(starting_point)
