@@ -2,6 +2,8 @@ asgiref==3.4.1
 beautifulsoup4==4.9.3
 certifi==2021.5.30
 chardet==4.0.0
+chromedriver==2.24.1
+chromedriver-binary-auto==0.1.1
 click==8.0.1
 fastapi==0.65.2
 greenlet==1.1.0
