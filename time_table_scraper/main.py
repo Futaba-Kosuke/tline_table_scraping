@@ -7,12 +7,13 @@ import chromedriver_binary
 
 from my_types import TrainType, ResponseType
 
+TRANSFER_URL: Final[str] = 'https://www.navitime.co.jp/transfer/'
+
 
 def access_page(starting_point: str, end_point: str) -> str:
     driver = webdriver.Chrome()
 
-    transfer_url: Final[str] = 'https://www.navitime.co.jp/transfer/'
-    driver.get(transfer_url)
+    driver.get(TRANSFER_URL)
 
     driver.find_element_by_id('orv-station-name').send_keys(starting_point)
     driver.find_element_by_id('dnv-station-name').send_keys(end_point)
@@ -34,7 +35,6 @@ def format_time_str(time_str: str) -> TrainType:
 
 def time_table_scraper(starting_point: str, end_point: str) -> ResponseType:
     url: str = access_page(starting_point, end_point)
-    print(url)
 
     response = request.urlopen(url)
     page = BeautifulSoup(response)
