@@ -8,3 +8,25 @@ TrainType = TypedDict('TrainType', {
 ResponseType = TypedDict('ResponseType', {
     'time_table': List[TrainType]
 })
+
+NavitimeParametersType = TypedDict('NavitimeParametersType', {
+    'orvStationName': str,
+    'orvStationCode': str,
+    'dnvStationName': str,
+    'dnvStationCode': str,
+    'thr1StationName': str,
+    'thr1StationCode': str,
+    'thr2StationName': str,
+    'thr2StationCode': str,
+    'thr3StationName': str,
+    'thr3StationCode': str,
+    'year': str,
+    'month': str,
+    'day': str,
+    'hour': str,
+    'minute': str,
+    'basis': str,
+    'freePass': str,
+    'sort': str,
+    'wspeed': str,
+})
