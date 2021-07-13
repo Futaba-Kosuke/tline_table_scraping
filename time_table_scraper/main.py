@@ -1,44 +1,50 @@
 from typing import Final
-from urllib import request
+from datetime import datetime
+import requests
 
 from bs4 import BeautifulSoup
-from selenium import webdriver
-import chromedriver_binary
 
-from my_types import TrainType, ResponseType
+from my_types import NavitimeParametersType, TrainType, ResponseType
 
-TRANSFER_URL: Final[str] = 'https://www.navitime.co.jp/transfer/'
-
-
-def access_page(starting_point: str, end_point: str) -> str:
-    driver = webdriver.Chrome()
-
-    driver.get(TRANSFER_URL)
-
-    driver.find_element_by_id('orv-station-name').send_keys(starting_point)
-    driver.find_element_by_id('dnv-station-name').send_keys(end_point)
-
-    driver.find_element_by_class_name('submit-container').click()
-    result: str = driver.current_url
-    driver.close()
-
-    return result
+BASE_URL: Final[str] = 'https://www.navitime.co.jp/transfer/searchlist'
 
 
 def format_time_str(time_str: str) -> TrainType:
+    departure_time, arrival_time = time_str.split(u'\xa0⇒\xa0', 2)
     result: TrainType = {
-        'time': tuple(time_str.split(u'\xa0⇒\xa0', 2)),
+        'time': (departure_time, arrival_time),
         'type': 'normal'
     }
     return result
 
 
 def time_table_scraper(starting_point: str, end_point: str) -> ResponseType:
-    url: str = access_page(starting_point, end_point)
+    now = datetime.now()
+    payloads: NavitimeParametersType = {
+        'orvStationName': starting_point,
+        'orvStationCode': '',
+        'dnvStationName': end_point,
+        'dnvStationCode': '',
+        'thr1StationName': '',
+        'thr1StationCode': '',
+        'thr2StationName': '',
+        'thr2StationCode': '',
+        'thr3StationName': '',
+        'thr3StationCode': '',
+        'year': str(now.year),
+        'month': str(now.month),
+        'day': str(now.day),
+        'hour': str(now.hour),
+        'minute': str(now.minute),
+        'basis': '1',
+        'freePass': '0',
+        'sort': '4',
+        'wspeed': '100',
+    }
+    response = requests.get(BASE_URL, params=payloads)
+    url: str = response.url
 
-    response = request.urlopen(url)
-    page = BeautifulSoup(response)
-    response.close()
+    page = BeautifulSoup(response.content, 'html.parser')
 
     # 時刻表の取得
     rows = page.find_all('dl', class_='summay_route')
