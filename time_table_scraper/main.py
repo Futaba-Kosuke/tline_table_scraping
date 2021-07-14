@@ -9,12 +9,12 @@ from my_types import NavitimeParametersType, ResponseType
 BASE_URL: Final[str] = 'https://www.navitime.co.jp/transfer/searchlist'
 
 
-def get_time_table(rows: List[Any], sections: List[Any]) -> ResponseType:
+def get_time_table(rows: List[Any], railroad_areas: List[Any]) -> ResponseType:
     return {
         'time_table': [
             {
                 'time': get_train_time(rows[i]),
-                'type': get_train_type(sections[i])
+                'type': get_train_type(railroad_areas[i])
             } for i in range(len(rows))
         ]
     }
@@ -26,11 +26,11 @@ def get_train_time(row: Any) -> Tuple[str, str]:
     return (departure_time, arrival_time)
 
 
-def get_train_type(section: Any) -> str:
-    section_str = section.text
-    if '快速' in section_str:
+def get_train_type(railroad_area: Any) -> str:
+    railroad_area_str = railroad_area.text
+    if '快速' in railroad_area_str:
         return 'rapid'
-    elif '区間快速' in section_str:
+    elif '区間快速' in railroad_area_str:
         return 'regional_rapid'
     else:
         return 'normal'
@@ -66,8 +66,9 @@ def time_table_scraper(starting_point: str, end_point: str) -> ResponseType:
 
     # 時刻表の取得
     rows = page.find_all('dl', class_='summay_route')
-    sections = page.find_all('div', class_='section_detail_frame')
+    railroad_areas = [section.find('div', 'railroad-area') for section in
+                      page.find_all('div', class_='section_detail_frame')]
     # 時刻の取得
-    result: ResponseType = get_time_table(rows, sections)
+    result: ResponseType = get_time_table(rows, railroad_areas)
 
     return result
