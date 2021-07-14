@@ -30,6 +30,8 @@ def get_train_type(section: Any) -> str:
     section_str = section.text
     if '快速' in section_str:
         return 'rapid'
+    elif '区間快速' in section_str:
+        return 'regional_rapid'
     else:
         return 'normal'
 
