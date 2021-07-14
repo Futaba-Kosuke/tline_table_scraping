@@ -28,10 +28,10 @@ def get_train_time(row: Any) -> Tuple[str, str]:
 
 def get_train_type(railroad_area: Any) -> str:
     railroad_area_str = railroad_area.text
-    if '快速' in railroad_area_str:
-        return 'rapid'
-    elif '区間快速' in railroad_area_str:
+    if '区間快速' in railroad_area_str:
         return 'regional_rapid'
+    elif '快速' in railroad_area_str:
+        return 'rapid'
     else:
         return 'normal'
 
