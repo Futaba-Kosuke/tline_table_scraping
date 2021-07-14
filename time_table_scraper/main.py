@@ -66,6 +66,7 @@ def time_table_scraper(starting_point: str, end_point: str) -> ResponseType:
 
     # 時刻表の取得
     rows = page.find_all('dl', class_='summay_route')
+    # 最初に使用する鉄道を取得
     railroad_areas = [section.find('div', 'railroad-area') for section in
                       page.find_all('div', class_='section_detail_frame')]
     # 時刻の取得
