@@ -33,7 +33,7 @@ def get_train_type(railroad_area: Any) -> str:
     elif '快速' in railroad_area_str:
         return 'rapid'
     else:
-        return 'normal'
+        return 'local'
 
 
 def time_table_scraper(starting_point: str, end_point: str) -> ResponseType:
