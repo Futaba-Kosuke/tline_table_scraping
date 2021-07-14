@@ -2,11 +2,13 @@ from typing import List, Tuple, TypedDict
 
 TrainType = TypedDict('TrainType', {
     'time': Tuple[str, str],
-    'type': str
+    'type': str,
+    'transfer': int
 })
 
 ResponseType = TypedDict('ResponseType', {
-    'time_table': List[TrainType]
+    'time_table': List[TrainType],
+    'url': str
 })
 
 NavitimeParametersType = TypedDict('NavitimeParametersType', {
