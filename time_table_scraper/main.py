@@ -41,7 +41,7 @@ def get_train_type(railroad_area: Any) -> str:
 def get_train_transfer(row: Any) -> int:
     transfer = row.find('dd', class_='required_transfer').find('div', class_='text').text.translate(
         str.maketrans({'\n': None, '\t': None, '乗': None, '換': None, '回': None}))
-    if transfer == 'なし':
+    if transfer.strip() == 'なし':
         return 0
     else:
         return int(transfer)
